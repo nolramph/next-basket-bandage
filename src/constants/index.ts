@@ -201,4 +201,3 @@ export const FOOTER_LINKS = [
     custom: 'getInTouch',
   },
 ]
-
