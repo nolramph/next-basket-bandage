@@ -16,6 +16,10 @@ import ActionItems from './shared/header/nav/action-items'
 import Footer from './shared/footer'
 import FooterBranding from './shared/footer/branding'
 import FooterNav from './shared/footer/footer-nav'
+import BandageImageCard from './ui/BandageImageCard'
+
+//home
+import HeroContent from './shared/home/hero-content'
 
 export {
   Hamburger,
@@ -31,4 +35,6 @@ export {
   Footer,
   FooterBranding,
   FooterNav,
+  BandageImageCard,
+  HeroContent,
 }
