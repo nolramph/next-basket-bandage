@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 //components
 import { NavItems, ActionItems, MobileNav } from '@/components'
 
@@ -7,7 +5,7 @@ import { NavItems, ActionItems, MobileNav } from '@/components'
 import { BRAND_NAME } from '@/constants'
 
 //mui components
-import { AppBar, Toolbar, Typography, Button } from '@mui/material'
+import { AppBar, Toolbar, Typography, Button, Link } from '@mui/material'
 
 const Header = () => {
   return (

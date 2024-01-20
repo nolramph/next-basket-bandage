@@ -2,6 +2,11 @@
 
 import React from 'react'
 import Link from 'next/link'
+
+//constants
+import { HEADER_CONTACT_LINKS, HEADER_CONTACT_TEXT, HEADER_SOCIAL_LINKS_ICONS } from '@/constants'
+
+//mui components
 import {
   AppBar,
   Toolbar,
@@ -13,7 +18,6 @@ import {
   Box,
   Typography,
 } from '@mui/material'
-import { HEADER_CONTACT_LINKS, HEADER_CONTACT_TEXT, HEADER_SOCIAL_LINKS_ICONS } from '@/constants'
 
 const HeaderContacts = () => {
   return (

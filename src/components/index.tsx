@@ -17,6 +17,11 @@ import Footer from './shared/footer'
 import FooterBranding from './shared/footer/branding'
 import FooterNav from './shared/footer/footer-nav'
 import BandageImageCard from './ui/BandageImageCard'
+import Products from './shared/products'
+import BreadCrumb from './ui/Breadcrumb'
+import ColorListPicker from './ui/ColorListPicker'
+import CircularIcon from './ui/CircularIcon'
+import ImageSlider from './ui/ImageSlider'
 
 //home
 import HeroContent from './shared/home/hero-content'
@@ -37,4 +42,9 @@ export {
   FooterNav,
   BandageImageCard,
   HeroContent,
+  Products,
+  BreadCrumb,
+  ColorListPicker,
+  CircularIcon,
+  ImageSlider,
 }

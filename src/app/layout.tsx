@@ -1,14 +1,13 @@
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
-import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-
-import theme from '@/theme'
 
 //components
 import { Header, HeaderContacts, Footer } from '@/components'
 
 //mui components
 import Box from '@mui/material/Box'
+
+//providers
+import Providers from '@/providers'
 
 export const metadata = {
   title: 'Bandage',
@@ -19,17 +18,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <HeaderContacts />
-            <Header />
-            <Box sx={{ padding: '0 24px' }}>
-              {children}
-              <Footer />
-            </Box>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <Providers>
+          <CssBaseline />
+          <HeaderContacts />
+          <Header />
+          <Box sx={{ padding: '0 24px' }}>
+            {children}
+            <Footer />
+          </Box>
+        </Providers>
       </body>
     </html>
   )

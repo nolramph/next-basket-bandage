@@ -2,6 +2,7 @@
 import { Montserrat } from 'next/font/google'
 import { createTheme } from '@mui/material/styles'
 
+/* eslint-disable no-unused-vars */
 // Extend the Palette and PaletteOptions interfaces
 declare module '@mui/material/styles/createPalette' {
   interface Palette {
@@ -30,6 +31,8 @@ declare module '@mui/material/Typography' {
     content: true
   }
 }
+
+/* eslint-disable no-unused-vars */
 
 const montserrat = Montserrat({
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -62,7 +65,7 @@ const theme = createTheme({
       xs: 0,
       sm: 600,
       md: 1019,
-      lg: 1200,
+      lg: 1400,
       xl: 1536,
     },
   },

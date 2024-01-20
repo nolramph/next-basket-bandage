@@ -16,17 +16,12 @@ import {
   Box,
   Drawer,
   List,
-  Divider,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   useTheme,
 } from '@mui/material'
-
-//mui icons
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
 
 const MobileNav = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)

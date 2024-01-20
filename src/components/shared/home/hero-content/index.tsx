@@ -22,7 +22,7 @@ const HeroContent = () => {
         component="div"
         sx={{
           fontWeight: 700,
-          fontSize: '40px',
+          fontSize: '24px',
           textTransform: 'uppercase',
           mb: '5px',
           lineHeight: '50px',
