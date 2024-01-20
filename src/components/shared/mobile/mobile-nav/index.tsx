@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 
 //components
 import { Hamburger } from '@/components'
@@ -9,7 +10,10 @@ import { Hamburger } from '@/components'
 //constants
 import { HEADER_LINKS, ACTION_LINKS } from '@/constants'
 
-//mui
+//duxs
+import { RootState } from '../../../../store'
+
+//mui components
 import {
   IconButton,
   SvgIcon,
@@ -21,10 +25,16 @@ import {
   ListItemIcon,
   ListItemText,
   useTheme,
+  Badge,
 } from '@mui/material'
+
+//utils
+import { extractTotalQuantity } from '@/utils/helper-utils'
 
 const MobileNav = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const cartItems = useSelector((state: RootState) => state.cart.items)
+  const wishListItems = useSelector((state: RootState) => state.wishList.items)
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -76,16 +86,19 @@ const MobileNav = () => {
               sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
             >
               {Icon && (
-                <ListItemIcon
-                  sx={{
-                    minWidth: { xs: '25px', textAlign: 'center' },
-                    width: { xs: label.includes('Login') ? 'auto' : '100%' },
-                    display: { xs: 'flex' },
-                    justifyContent: { xs: 'center' },
-                  }}
-                >
-                  <Icon fontSize="large" sx={{ color: theme.palette.primary.main }} />
-                </ListItemIcon>
+                <>
+                  {href.includes('cart') ? (
+                    <Badge badgeContent={extractTotalQuantity(cartItems)} color="secondary">
+                      {CustomListItemIcon({ label, icon: Icon, theme })}
+                    </Badge>
+                  ) : href.includes('wishlist') ? (
+                    <Badge badgeContent={extractTotalQuantity(wishListItems)} color="secondary">
+                      {CustomListItemIcon({ label, icon: Icon, theme })}
+                    </Badge>
+                  ) : (
+                    CustomListItemIcon({ label, icon: Icon, theme })
+                  )}
+                </>
               )}
               {label && (
                 <ListItemText
@@ -127,3 +140,16 @@ const MobileNav = () => {
 }
 
 export default MobileNav
+
+const CustomListItemIcon = ({ label, icon: Icon, theme }: any) => (
+  <ListItemIcon
+    sx={{
+      minWidth: { xs: '25px', textAlign: 'center' },
+      width: { xs: label.includes('Login') ? 'auto' : '100%' },
+      display: { xs: 'flex' },
+      justifyContent: { xs: 'center' },
+    }}
+  >
+    <Icon fontSize="large" sx={{ color: theme.palette.primary.main }} />
+  </ListItemIcon>
+)

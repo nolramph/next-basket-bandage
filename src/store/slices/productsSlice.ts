@@ -4,7 +4,7 @@ import axios from 'axios'
 //types
 import { RootState } from '../index'
 
-interface Product {
+export interface Product {
   id: number
   title: string
   category: string

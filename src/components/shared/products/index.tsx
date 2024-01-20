@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
 import Link from 'next/link'
 
 //components
@@ -10,6 +9,9 @@ import ProductCard from './product-card'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchProducts, incrementPage } from '../../../store/slices/productsSlice'
 import { AppDispatch, RootState } from '../../../store'
+
+//hooks
+import useEffectExceptOnMount from '@/hooks/use-effect-except-on-mount'
 
 //mui components
 import Grid from '@mui/material/Unstable_Grid2'
@@ -25,7 +27,7 @@ const Products = () => {
   const error = useSelector((state: RootState) => state.products.error)
   const page = useSelector((state: RootState) => state.products.page)
 
-  useEffect(() => {
+  useEffectExceptOnMount(() => {
     dispatch(fetchProducts())
   }, [dispatch, page])
 

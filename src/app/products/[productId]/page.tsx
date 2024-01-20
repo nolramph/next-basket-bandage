@@ -1,5 +1,6 @@
 'use client'
 import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 //components
 import { BreadCrumb, ImageSlider, CircularIcon, ColorListPicker } from '@/components'
@@ -7,7 +8,8 @@ import { BreadCrumb, ImageSlider, CircularIcon, ColorListPicker } from '@/compon
 //duxs
 import { AppDispatch, RootState } from '@/store'
 import { fetchProductById } from '@/store/slices/productsSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import { addToCart } from '@/store/slices/cartSlice'
+import { addToWishList } from '@/store/slices/wishListSlice'
 
 //mui components
 import { Box, Typography, Rating, Button, useTheme, Divider } from '@mui/material'
@@ -34,6 +36,20 @@ const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
   }, [dispatch, productId])
 
   const theme = useTheme()
+  const formattedProduct = product && {
+    id: product?.id,
+    title: product?.title,
+    price: product?.price,
+    thumbnail: product?.thumbnail,
+    quantity: 1,
+  }
+
+  const handleAddToCart = () => {
+    if (formattedProduct) dispatch(addToCart(formattedProduct))
+  }
+  const handleAddToWishList = () => {
+    if (formattedProduct) dispatch(addToWishList(formattedProduct))
+  }
 
   return (
     <>
@@ -113,9 +129,15 @@ const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
                   <Button variant="contained" sx={{ color: 'white' }}>
                     Selection Options
                   </Button>
-                  <CircularIcon Icon={FavoriteBorderIcon} borderColor="#E8E8E8" />
-                  <CircularIcon Icon={ShoppingCartOutlinedIcon} borderColor="#E8E8E8" />
-                  <CircularIcon Icon={VisibilityIcon} borderColor="#E8E8E8" />
+                  <Button onClick={handleAddToWishList}>
+                    <CircularIcon Icon={FavoriteBorderIcon} borderColor="#E8E8E8" />
+                  </Button>
+                  <Button onClick={handleAddToCart}>
+                    <CircularIcon Icon={ShoppingCartOutlinedIcon} borderColor="#E8E8E8" />
+                  </Button>
+                  <Button onClick={() => alert('Product is visible?')}>
+                    <CircularIcon Icon={VisibilityIcon} borderColor="#E8E8E8" />
+                  </Button>
                 </Box>
               </Box>
             </Box>
