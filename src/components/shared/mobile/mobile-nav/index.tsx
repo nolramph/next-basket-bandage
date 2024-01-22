@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { useSelector, useDispatch } from 'react-redux'
 
 //components
-import { Hamburger } from '@/components'
+import { Hamburger } from '@/components/icons'
+import { useSnackbar } from '@/providers/snackbar-provider'
 
 //constants
 import { HEADER_LINKS, ACTION_LINKS } from '@/constants'
@@ -15,6 +16,9 @@ import { extractTotalQuantity } from '@/utils/helper-utils'
 import { AppDispatch, RootState } from '@/store'
 import { toggleCartModal } from '@/store/slices/cartSlice'
 import { toggleWishListModal } from '@/store/slices/wishListSlice'
+
+//mui icons
+import CloseIcon from '@mui/icons-material/Close'
 
 //mui components
 import {
@@ -49,6 +53,8 @@ const MobileNav = () => {
     setIsDrawerOpen(open)
   }
 
+  const { showSnackbar } = useSnackbar()
+
   const theme = useTheme()
 
   const showNavItems = () => (
@@ -61,8 +67,14 @@ const MobileNav = () => {
       <List
         sx={{
           flexGrow: 0,
+          pt: '60px',
+          position: 'relative',
+          textAlign: 'right',
         }}
       >
+        <IconButton onClick={() => toggleDrawer(false)} sx={{ mr: '5px' }}>
+          <CloseIcon />
+        </IconButton>
         {HEADER_LINKS.map(({ label, href }, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton component={Link} href={href} sx={{ textAlign: 'center' }}>
@@ -85,7 +97,12 @@ const MobileNav = () => {
               <>
                 {href.includes('cart') ? (
                   <ListItemButton
-                    onClick={() => dispatch(toggleCartModal())}
+                    onClick={() => {
+                      if (cartItems.length === 0) {
+                        return showSnackbar('Your cart is empty', 'warning')
+                      }
+                      dispatch(toggleCartModal())
+                    }}
                     sx={{
                       px: 0,
                       textAlign: 'center',
@@ -99,7 +116,12 @@ const MobileNav = () => {
                   </ListItemButton>
                 ) : href.includes('wishlist') ? (
                   <ListItemButton
-                    onClick={() => dispatch(toggleWishListModal())}
+                    onClick={() => {
+                      if (wishListItems.length === 0) {
+                        return showSnackbar('Your wishlist is empty', 'warning')
+                      }
+                      dispatch(toggleWishListModal())
+                    }}
                     sx={{
                       px: 0,
                       textAlign: 'center',

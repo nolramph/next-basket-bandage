@@ -32,7 +32,7 @@ const AppModals = () => {
         items={wishListItems}
         open={isWishListModalOpen}
         onClose={() => dispatch(closeWishListModal())}
-        onAddItem={product => dispatch(addToWishList(product))}
+        onAddItem={product => dispatch(addToCart(product))}
         onRemoveItem={product => dispatch(removeFromWishList(product.id))}
       />
     </>

@@ -96,7 +96,7 @@ const WishListModal = ({ open, onClose, items, onAddItem, onRemoveItem }: WishLi
                   <Button
                     variant="contained"
                     sx={{ mt: 3, color: '#FFF', backgroundColor: '#FF0000' }}
-                    onClick={() => onAddItem(item)}
+                    onClick={() => onRemoveItem(item)}
                     fullWidth
                   >
                     Remove

@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CssBaseline />
           <HeaderContacts />
           <Header />
-          <Box sx={{ padding: '0 24px' }}>
+          <Box>
             {children}
             <Footer />
           </Box>

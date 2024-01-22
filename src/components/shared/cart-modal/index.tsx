@@ -77,13 +77,13 @@ const CartModal = ({ open, onClose, items, onAddItem, onRemoveItem }: CartModalP
                     sx={{ padding: '5px 8px' }}
                   />
                   <Typography variant="body1" sx={{ lineHeight: 0.8, padding: '5px 8px' }}>
-                    {`Stock: ${item.stock}`}
+                    {formatToUSD(item.price)}
                   </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <IconButton onClick={() => onRemoveItem(item)}>
                       <RemoveCircleOutlineIcon />
                     </IconButton>
-                    <Typography variant="body1" component="span">
+                    <Typography variant="body1" component="span" fontWeight={700}>
                       {item.quantity}
                     </Typography>
                     <IconButton onClick={() => onAddItem(item)}>

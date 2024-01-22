@@ -3,7 +3,15 @@
 import * as React from 'react'
 
 //components
-import { BandageImageCard, HeroContent, Products } from '@/components'
+import {
+  BandageImageCard,
+  HeroContent,
+  Products,
+  Services,
+  FeaturedProducts,
+  Testimonial,
+  BottomCallToAction,
+} from '@/components'
 
 //mui components
 import { Box, Typography, useTheme } from '@mui/material'
@@ -18,7 +26,7 @@ export default function HomePage() {
       <Box
         sx={{
           display: 'flex',
-          padding: { xs: '20px 0', md: '80px 147px' },
+          padding: { xs: '80px 24px', md: '80px 171px' },
           justifyContent: 'center',
         }}
       >
@@ -73,11 +81,11 @@ export default function HomePage() {
         </Grid>
       </Box>
 
-      {/* Product lists */}
+      {/* Product lists section */}
       <Box
         sx={{
           display: 'flex',
-          padding: { xs: '20px 0', md: '80px 147px' },
+          padding: { xs: '80px 24px', md: '80px 171px' },
           justifyContent: 'center',
           flexDirection: 'column',
         }}
@@ -96,7 +104,7 @@ export default function HomePage() {
             variant="h3"
             fontWeight={700}
             fontSize="24px"
-            sx={{ textAlign: 'center', lineHeight: '32px' }}
+            sx={{ textAlign: 'center', lineHeight: '32px', textTransform: 'uppercase' }}
           >
             Best Seller Products
           </Typography>
@@ -110,6 +118,18 @@ export default function HomePage() {
         </Box>
         <Products />
       </Box>
+
+      {/* Service lists section */}
+      <Services />
+
+      {/* Featured products lists section */}
+      <FeaturedProducts />
+
+      {/* Testimonial section */}
+      <Testimonial />
+
+      {/* Testimonial section */}
+      <BottomCallToAction />
     </>
   )
 }

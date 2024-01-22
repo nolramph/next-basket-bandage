@@ -13,7 +13,7 @@ import { AppModals } from '@/components'
 const Header = () => {
   return (
     <>
-      <AppBar position="static" sx={{ zIndex: 2000, bgcolor: 'background.default' }}>
+      <AppBar position="fixed" sx={{ zIndex: 2000, bgcolor: 'background.default' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: { xs: 'space-between' } }}>
           <Link href="/" passHref>
             <Button

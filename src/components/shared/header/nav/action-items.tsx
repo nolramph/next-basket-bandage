@@ -3,6 +3,9 @@
 import Link from 'next/link'
 import { useSelector, useDispatch } from 'react-redux'
 
+//components
+import { useSnackbar } from '@/providers/snackbar-provider'
+
 //constants
 import { ACTION_LINKS } from '@/constants'
 
@@ -31,6 +34,7 @@ const ActionItems = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items)
   const wishListItems = useSelector((state: RootState) => state.wishList.items)
   const dispatch = useDispatch<AppDispatch>()
+  const { showSnackbar } = useSnackbar()
 
   const theme = useTheme()
   return (
@@ -49,14 +53,27 @@ const ActionItems = () => {
             {Icon && (
               <>
                 {href.includes('cart') ? (
-                  <ListItemButton onClick={() => dispatch(toggleCartModal())} sx={{ padding: 0 }}>
+                  <ListItemButton
+                    onClick={() => {
+                      if (cartItems.length === 0) {
+                        return showSnackbar('Your cart is empty', 'warning')
+                      }
+                      dispatch(toggleCartModal())
+                    }}
+                    sx={{ padding: 0 }}
+                  >
                     <Badge badgeContent={extractTotalQuantity(cartItems)} color="secondary">
                       {CustomListItemContent({ label, icon: Icon, theme })}
                     </Badge>
                   </ListItemButton>
                 ) : href.includes('wishlist') ? (
                   <ListItemButton
-                    onClick={() => dispatch(toggleWishListModal())}
+                    onClick={() => {
+                      if (wishListItems.length === 0) {
+                        return showSnackbar('Your wishlist is empty', 'warning')
+                      }
+                      dispatch(toggleWishListModal())
+                    }}
                     sx={{ padding: 0 }}
                   >
                     <Badge badgeContent={extractTotalQuantity(wishListItems)} color="secondary">

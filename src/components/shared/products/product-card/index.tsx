@@ -20,6 +20,7 @@ const ProductCard = ({ imageUrl, title, category, price }: ProductCardProps) => 
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        textAlign: 'center',
       }}
     >
       <Box

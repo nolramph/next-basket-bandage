@@ -51,15 +51,17 @@ const Products = () => {
           products.length &&
           products.map(product => (
             <Grid key={product.id} xs={12} sm={4} md={3} lg={2}>
-              <Button href={`/products/${product.id}`} LinkComponent={Link}>
-                <ProductCard
-                  key={product.id}
-                  imageUrl={product.thumbnail}
-                  title={product.title}
-                  category={product.category}
-                  price={formatToUSD(product.price)}
-                />
-              </Button>
+              <Link href={`/products/${product.id}`} passHref>
+                <Button href={`/products/${product.id}`} component="button" sx={{ width: '100%' }}>
+                  <ProductCard
+                    key={product.id}
+                    imageUrl={product.thumbnail}
+                    title={product.title}
+                    category={product.category}
+                    price={formatToUSD(product.price)}
+                  />
+                </Button>
+              </Link>
             </Grid>
           ))}
       </Grid>

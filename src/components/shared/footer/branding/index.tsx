@@ -21,7 +21,14 @@ import Grid from '@mui/material/Unstable_Grid2'
 const FooterBranding = () => {
   const theme = useTheme()
   return (
-    <Box sx={{ flexGrow: 1, width: '100%', padding: { xs: '20px 0', md: '80px 147px' } }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        width: '100%',
+        padding: { xs: '20px 24px', md: '80px 171px' },
+        background: '#FAFAFA',
+      }}
+    >
       <Grid container spacing={{ xs: 1, md: 2 }}>
         <Grid xs={12} md={6}>
           <Button href="/" LinkComponent={Link} sx={{ textTransform: 'capitalize' }}>

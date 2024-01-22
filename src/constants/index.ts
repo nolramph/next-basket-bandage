@@ -1,10 +1,21 @@
+//icon components
+import {
+  Instagram,
+  Youtube,
+  Facebook,
+  Twitter,
+  BookReader,
+  Book,
+  ArrowGrowth,
+} from '@/components/icons'
+
+//mui icons
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
-import { Instagram, Youtube, Facebook, Twitter } from '@/components'
 
 export const BRAND_NAME = 'Bandage'
 
@@ -98,106 +109,148 @@ export const HEADER_SOCIAL_LINKS_ICONS = [
 
 export const FOOTER_LINKS = [
   {
-    main: {
-      label: 'Company Info',
-      href: '/',
-    },
-    sub: [
+    main: [
+      {
+        label: 'Company Info',
+        href: '/',
+        isHeading: true,
+      },
+
       {
         label: 'About Us',
         href: '/',
+        isHeading: false,
       },
       {
         label: 'Carrier',
         href: '/',
+        isHeading: false,
       },
       {
         label: 'We are hiring',
         href: '/',
+        isHeading: false,
       },
       {
         label: 'Blog',
         href: '/',
+        isHeading: false,
       },
     ],
   },
+
   {
-    main: {
-      label: 'Legal',
-      href: '/',
-    },
-    sub: [
+    main: [
       {
-        label: 'About Us',
+        label: 'Features',
         href: '/',
+        isHeading: true,
       },
-      {
-        label: 'Carrier',
-        href: '/',
-      },
-      {
-        label: 'We are hiring',
-        href: '/',
-      },
-      {
-        label: 'Blog',
-        href: '/',
-      },
-    ],
-  },
-  {
-    main: {
-      label: 'Features',
-      href: '/',
-    },
-    sub: [
+
       {
         label: 'Business Marketing',
         href: '/',
+        isHeading: false,
       },
       {
         label: 'User Analytic',
         href: '/',
+        isHeading: false,
       },
       {
         label: 'Live Chat',
         href: '/',
+        isHeading: false,
       },
       {
         label: 'Unlimited Support',
         href: '/',
+        isHeading: false,
       },
     ],
   },
   {
-    main: {
-      label: 'Resources',
-      href: '/',
-    },
-    sub: [
+    main: [
       {
-        label: 'IOS & Android',
+        label: 'Legal',
         href: '/',
+        isHeading: true,
+      },
+
+      {
+        label: 'About Us',
+        href: '/',
+        isHeading: false,
       },
       {
-        label: 'Watch a Demo',
+        label: 'Carrier',
         href: '/',
+        isHeading: false,
       },
       {
-        label: 'Customers',
+        label: 'We are hiring',
         href: '/',
+        isHeading: false,
       },
       {
-        label: 'API',
+        label: 'Blog',
         href: '/',
+        isHeading: false,
       },
     ],
   },
   {
-    main: {
-      label: 'Get In Touch',
-      href: '/',
-    },
-    custom: 'getInTouch',
+    main: [
+      {
+        label: 'Get In Touch',
+        href: '/',
+        isHeading: true,
+      },
+    ],
+  },
+]
+
+export const SERVICES_SECTION = [
+  {
+    title: 'Easy Wins',
+    content: 'Get your best looking smile now!',
+    icon: BookReader,
+  },
+  {
+    title: 'Concrete',
+    content: 'Defalcate is most focused in helping you discover your most beautiful smile',
+    icon: Book,
+  },
+  {
+    title: 'Hack Growth ',
+    content: 'Overcame any hurdle or any other problem.',
+    icon: ArrowGrowth,
+  },
+]
+
+const FEATURED_SECTION_DEFAULT_CONTENT = {
+  title: "Loudest à la Madison #1 (L'integral)",
+  content: "We focus on ergonomics and meeting you where you work. It's only a keystroke away.'",
+  time: '22 April 2021',
+  comments: 10,
+  category: [
+    { title: 'Google', isActive: true },
+    { title: 'Trending', isActive: false },
+    { title: 'New', isActive: false },
+  ],
+}
+
+export const FEATURED_SECTION = [
+  {
+    ...FEATURED_SECTION_DEFAULT_CONTENT,
+    cardImage: 1,
+  },
+  {
+    ...FEATURED_SECTION_DEFAULT_CONTENT,
+    cardImage: 2,
+  },
+  {
+    ...FEATURED_SECTION_DEFAULT_CONTENT,
+    cardImage: 3,
   },
 ]
