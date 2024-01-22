@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Product } from './productsSlice'
 
-export type WishListItem = Omit<Product, 'category' | 'rating' | 'images'> & { quantity: number }
+export type WishListItem = Product & { quantity: number }
 
-interface CartState {
+interface WishListState {
   items: WishListItem[]
+  isWishListModalOpen: boolean
 }
 
-const initialState: CartState = {
+const initialState: WishListState = {
   items: [],
+  isWishListModalOpen: false,
 }
 
 const wishListSlice = createSlice({
@@ -19,26 +21,33 @@ const wishListSlice = createSlice({
     addToWishList: (state, action: PayloadAction<WishListItem>) => {
       const existingItem = state.items.find(item => item.id === action.payload.id)
       if (existingItem) {
-        existingItem.quantity += 1
+        return
       } else {
         state.items.push({ ...action.payload, quantity: 1 })
-      }
-    },
-    // New reducer to reduce the quantity of a wishlist
-    reduceWishListQuantity: (state, action: PayloadAction<number>) => {
-      const existingItem = state.items.find(item => item.id === action.payload)
-      if (existingItem && existingItem.quantity > 1) {
-        existingItem.quantity -= 1
-      } else {
-        state.items = state.items.filter(item => item.id !== action.payload)
       }
     },
     // New reducer to remove an item from the wishlist
     removeFromWishList: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(item => item.id !== action.payload)
     },
+    //Reducer to manage the wishlist modal
+    toggleWishListModal: state => {
+      state.isWishListModalOpen = !state.isWishListModalOpen
+    },
+    openWishListModal: state => {
+      state.isWishListModalOpen = true
+    },
+    closeWishListModal: state => {
+      state.isWishListModalOpen = false
+    },
   },
 })
 
-export const { addToWishList, reduceWishListQuantity, removeFromWishList } = wishListSlice.actions
+export const {
+  addToWishList,
+  removeFromWishList,
+  toggleWishListModal,
+  openWishListModal,
+  closeWishListModal,
+} = wishListSlice.actions
 export default wishListSlice.reducer

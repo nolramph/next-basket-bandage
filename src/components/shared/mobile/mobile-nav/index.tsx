@@ -13,6 +13,8 @@ import { HEADER_LINKS, ACTION_LINKS } from '@/constants'
 //duxs
 import { extractTotalQuantity } from '@/utils/helper-utils'
 import { AppDispatch, RootState } from '@/store'
+import { toggleCartModal } from '@/store/slices/cartSlice'
+import { toggleWishListModal } from '@/store/slices/wishListSlice'
 
 //mui components
 import {
@@ -28,9 +30,6 @@ import {
   useTheme,
   Badge,
 } from '@mui/material'
-
-//utils
-import { toggleCartModal } from '@/store/slices/cartSlice'
 
 const MobileNav = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -85,13 +84,29 @@ const MobileNav = () => {
             {Icon && (
               <>
                 {href.includes('cart') ? (
-                  <ListItemButton onClick={() => dispatch(toggleCartModal())} sx={{ padding: 0 }}>
+                  <ListItemButton
+                    onClick={() => dispatch(toggleCartModal())}
+                    sx={{
+                      px: 0,
+                      textAlign: 'center',
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  >
                     <Badge badgeContent={extractTotalQuantity(cartItems)} color="secondary">
                       {CustomListItemContent({ label, icon: Icon, theme })}
                     </Badge>
                   </ListItemButton>
                 ) : href.includes('wishlist') ? (
-                  <ListItemButton onClick={() => alert('Open wishlist')} sx={{ padding: 0 }}>
+                  <ListItemButton
+                    onClick={() => dispatch(toggleWishListModal())}
+                    sx={{
+                      px: 0,
+                      textAlign: 'center',
+                      display: 'flex',
+                      justifyContent: 'center',
+                    }}
+                  >
                     <Badge badgeContent={extractTotalQuantity(wishListItems)} color="secondary">
                       {CustomListItemContent({ label, icon: Icon, theme })}
                     </Badge>

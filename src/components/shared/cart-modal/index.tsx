@@ -14,23 +14,17 @@ import { CartItem } from '@/store/slices/cartSlice'
 //utils
 import { formatToUSD } from '@/utils/format-utils'
 
-interface ShoppingCartModalProps {
+export interface CartModalProps {
   open: boolean
   onClose: () => void
-  cartItems: CartItem[]
+  items: CartItem[]
   onAddItem: (item: CartItem) => void // eslint-disable-line no-unused-vars
   onRemoveItem: (item: CartItem) => void // eslint-disable-line no-unused-vars
 }
 
-const ShoppingCartModal = ({
-  open,
-  onClose,
-  cartItems,
-  onAddItem,
-  onRemoveItem,
-}: ShoppingCartModalProps) => {
+const CartModal = ({ open, onClose, items, onAddItem, onRemoveItem }: CartModalProps) => {
   const getTotalPrice = () =>
-    formatToUSD(cartItems.reduce((total, item) => total + item.quantity * item.price, 0))
+    formatToUSD(items.reduce((total, item) => total + item.quantity * item.price, 0))
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -55,7 +49,7 @@ const ShoppingCartModal = ({
           CART
         </Typography>
         <Box>
-          {cartItems.map(item => (
+          {items.map(item => (
             <Box key={item.id} sx={{ py: '10px' }}>
               <Typography variant="body1" fontWeight={700} sx={{ pb: '16px' }}>
                 {item.title}
@@ -127,4 +121,4 @@ const ShoppingCartModal = ({
   )
 }
 
-export default ShoppingCartModal
+export default CartModal

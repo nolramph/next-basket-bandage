@@ -26,7 +26,7 @@ const cartSlice = createSlice({
         state.items.push({ ...action.payload, quantity: 1 })
       }
     },
-    // New reducer to reduce the quantity of an item
+    // Reducer to reduce the quantity of an item
     reduceCartQuantity: (state, action: PayloadAction<number>) => {
       const existingItem = state.items.find(item => item.id === action.payload)
       if (existingItem && existingItem.quantity > 1) {
@@ -35,10 +35,11 @@ const cartSlice = createSlice({
         state.items = state.items.filter(item => item.id !== action.payload)
       }
     },
-    // New reducer to remove an item from the cart
+    //Reducer to remove an item from the cart
     removeFromCart: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(item => item.id !== action.payload)
     },
+    //Reducer to manage the cart modal
     toggleCartModal: state => {
       state.isCartModalOpen = !state.isCartModalOpen
     },

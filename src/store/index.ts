@@ -1,15 +1,36 @@
 import { configureStore } from '@reduxjs/toolkit'
-import productsReducer from './slices/productsSlice'
-import cartReducer from './slices/cartSlice'
-import wishListReducer from './slices/wishListSlice'
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import rootReducer from './rootReducer'
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['products', 'cart', 'wishList'],
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-  reducer: {
-    products: productsReducer,
-    cart: cartReducer,
-    wishList: wishListReducer,
-  },
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 })
+
+export const persistor = persistStore(store)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

@@ -9,6 +9,7 @@ import { ACTION_LINKS } from '@/constants'
 //duxs
 import { AppDispatch, RootState } from '@/store'
 import { toggleCartModal } from '@/store/slices/cartSlice'
+import { toggleWishListModal } from '@/store/slices/wishListSlice'
 
 //mui components
 import {
@@ -54,7 +55,10 @@ const ActionItems = () => {
                     </Badge>
                   </ListItemButton>
                 ) : href.includes('wishlist') ? (
-                  <ListItemButton onClick={() => alert('Open wishlist')} sx={{ padding: 0 }}>
+                  <ListItemButton
+                    onClick={() => dispatch(toggleWishListModal())}
+                    sx={{ padding: 0 }}
+                  >
                     <Badge badgeContent={extractTotalQuantity(wishListItems)} color="secondary">
                       {CustomListItemContent({ label, icon: Icon, theme })}
                     </Badge>

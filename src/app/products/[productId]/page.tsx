@@ -29,6 +29,8 @@ export interface SearchParamProps {
 const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
   const dispatch = useDispatch<AppDispatch>()
   const product = useSelector((state: RootState) => state.products.currentProduct)
+  const wishListItems = useSelector((state: RootState) => state.wishList.items)
+  const wishListIds = wishListItems.map(item => item.id)
   const { showSnackbar } = useSnackbar()
 
   useEffect(() => {
@@ -134,7 +136,10 @@ const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
                   <Button variant="contained" sx={{ color: 'white' }}>
                     Selection Options
                   </Button>
-                  <Button onClick={handleAddToWishList}>
+                  <Button
+                    onClick={handleAddToWishList}
+                    disabled={!!product?.id && wishListIds.includes(product?.id)}
+                  >
                     <CircularIcon Icon={FavoriteBorderIcon} borderColor="#E8E8E8" />
                   </Button>
                   <Button onClick={handleAddToCart}>
