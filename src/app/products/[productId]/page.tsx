@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 //components
 import { BreadCrumb, ImageSlider, CircularIcon, ColorListPicker } from '@/components'
+import { useSnackbar } from '@/providers/snackbar-provider'
 
 //duxs
 import { AppDispatch, RootState } from '@/store'
@@ -28,6 +29,7 @@ export interface SearchParamProps {
 const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
   const dispatch = useDispatch<AppDispatch>()
   const product = useSelector((state: RootState) => state.products.currentProduct)
+  const { showSnackbar } = useSnackbar()
 
   useEffect(() => {
     if (productId) {
@@ -37,18 +39,21 @@ const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
 
   const theme = useTheme()
   const formattedProduct = product && {
-    id: product?.id,
-    title: product?.title,
-    price: product?.price,
-    thumbnail: product?.thumbnail,
+    ...product,
     quantity: 1,
   }
 
   const handleAddToCart = () => {
-    if (formattedProduct) dispatch(addToCart(formattedProduct))
+    if (formattedProduct) {
+      dispatch(addToCart(formattedProduct))
+      showSnackbar(`${formattedProduct.title} has been added to your cart`)
+    }
   }
   const handleAddToWishList = () => {
-    if (formattedProduct) dispatch(addToWishList(formattedProduct))
+    if (formattedProduct) {
+      dispatch(addToWishList(formattedProduct))
+      showSnackbar(`${formattedProduct.title} has been added to your wishlist`)
+    }
   }
 
   return (

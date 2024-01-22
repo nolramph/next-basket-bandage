@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Product } from './productsSlice'
 
-export type CartItem = Omit<Product, 'category' | 'rating' | 'images'> & { quantity: number }
+export type CartItem = Product & { quantity: number }
 
 interface CartState {
   items: CartItem[]
+  isCartModalOpen: boolean
 }
 
 const initialState: CartState = {
   items: [],
+  isCartModalOpen: false,
 }
 
 const cartSlice = createSlice({
@@ -37,8 +39,24 @@ const cartSlice = createSlice({
     removeFromCart: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(item => item.id !== action.payload)
     },
+    toggleCartModal: state => {
+      state.isCartModalOpen = !state.isCartModalOpen
+    },
+    openCartModal: state => {
+      state.isCartModalOpen = true
+    },
+    closeCartModal: state => {
+      state.isCartModalOpen = false
+    },
   },
 })
 
-export const { addToCart, reduceCartQuantity, removeFromCart } = cartSlice.actions
+export const {
+  addToCart,
+  reduceCartQuantity,
+  removeFromCart,
+  toggleCartModal,
+  openCartModal,
+  closeCartModal,
+} = cartSlice.actions
 export default cartSlice.reducer

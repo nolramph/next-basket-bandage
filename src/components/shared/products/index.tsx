@@ -7,8 +7,8 @@ import ProductCard from './product-card'
 
 //duxs
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchProducts, incrementPage } from '../../../store/slices/productsSlice'
-import { AppDispatch, RootState } from '../../../store'
+import { fetchProducts, incrementPage } from '@/store/slices/productsSlice'
+import { AppDispatch, RootState } from '@/store'
 
 //hooks
 import useEffectExceptOnMount from '@/hooks/use-effect-except-on-mount'

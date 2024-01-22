@@ -12,6 +12,8 @@ export interface Product {
   price: number
   rating: number
   images: Array<string>
+  brand: string
+  stock: number
 }
 
 interface ProductsState {
@@ -61,7 +63,11 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action: PayloadAction<Product[]>) => {
         state.status = 'succeeded'
-        state.items = state.items.concat(action.payload)
+        //Avoid duplicate records
+        const newProducts = action.payload.filter(
+          newProduct => !state.items.find(existingProduct => existingProduct.id === newProduct.id),
+        )
+        state.items.push(...newProducts)
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed'

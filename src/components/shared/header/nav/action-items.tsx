@@ -1,13 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 //constants
 import { ACTION_LINKS } from '@/constants'
 
 //duxs
-import { RootState } from '../../../../store'
+import { AppDispatch, RootState } from '@/store'
+import { toggleCartModal } from '@/store/slices/cartSlice'
 
 //mui components
 import {
@@ -28,6 +29,7 @@ import { extractTotalQuantity } from '@/utils/helper-utils'
 const ActionItems = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items)
   const wishListItems = useSelector((state: RootState) => state.wishList.items)
+  const dispatch = useDispatch<AppDispatch>()
 
   const theme = useTheme()
   return (
@@ -43,30 +45,27 @@ const ActionItems = () => {
       >
         {ACTION_LINKS.map(({ label, href, icon: Icon }) => (
           <ListItem key={href} disablePadding disableGutters>
-            <ListItemButton component={Link} href={href} sx={{ padding: 0 }}>
-              {Icon && (
-                <>
-                  {href.includes('cart') ? (
+            {Icon && (
+              <>
+                {href.includes('cart') ? (
+                  <ListItemButton onClick={() => dispatch(toggleCartModal())} sx={{ padding: 0 }}>
                     <Badge badgeContent={extractTotalQuantity(cartItems)} color="secondary">
-                      {CustomListItemIcon({ icon: Icon, theme })}
+                      {CustomListItemContent({ label, icon: Icon, theme })}
                     </Badge>
-                  ) : href.includes('wishlist') ? (
+                  </ListItemButton>
+                ) : href.includes('wishlist') ? (
+                  <ListItemButton onClick={() => alert('Open wishlist')} sx={{ padding: 0 }}>
                     <Badge badgeContent={extractTotalQuantity(wishListItems)} color="secondary">
-                      {CustomListItemIcon({ icon: Icon, theme })}
+                      {CustomListItemContent({ label, icon: Icon, theme })}
                     </Badge>
-                  ) : (
-                    CustomListItemIcon({ icon: Icon, theme })
-                  )}
-                </>
-              )}
-              {label && (
-                <ListItemText
-                  disableTypography
-                  sx={{ textWrap: 'nowrap', fontSize: '14px', fontWeight: 700 }}
-                  primary={label}
-                />
-              )}
-            </ListItemButton>
+                  </ListItemButton>
+                ) : (
+                  <ListItemButton component={Link} href={href} sx={{ padding: 0 }}>
+                    {CustomListItemContent({ label, icon: Icon, theme })}
+                  </ListItemButton>
+                )}
+              </>
+            )}
           </ListItem>
         ))}
       </List>
@@ -76,8 +75,17 @@ const ActionItems = () => {
 
 export default ActionItems
 
-const CustomListItemIcon = ({ icon: Icon, theme }: any) => (
-  <ListItemIcon sx={{ minWidth: { xs: '25px' } }}>
-    <Icon fontSize="small" sx={{ color: theme.palette.primary.main }} />
-  </ListItemIcon>
+const CustomListItemContent = ({ label, icon: Icon, theme }: any) => (
+  <>
+    <ListItemIcon sx={{ minWidth: { xs: '25px' } }}>
+      <Icon fontSize="small" sx={{ color: theme.palette.primary.main }} />
+    </ListItemIcon>
+    {label && (
+      <ListItemText
+        disableTypography
+        sx={{ textWrap: 'nowrap', fontSize: '14px', fontWeight: 700 }}
+        primary={label}
+      />
+    )}
+  </>
 )

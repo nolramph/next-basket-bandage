@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 //components
 import { Hamburger } from '@/components'
@@ -11,7 +11,8 @@ import { Hamburger } from '@/components'
 import { HEADER_LINKS, ACTION_LINKS } from '@/constants'
 
 //duxs
-import { RootState } from '../../../../store'
+import { extractTotalQuantity } from '@/utils/helper-utils'
+import { AppDispatch, RootState } from '@/store'
 
 //mui components
 import {
@@ -29,12 +30,13 @@ import {
 } from '@mui/material'
 
 //utils
-import { extractTotalQuantity } from '@/utils/helper-utils'
+import { toggleCartModal } from '@/store/slices/cartSlice'
 
 const MobileNav = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const cartItems = useSelector((state: RootState) => state.cart.items)
   const wishListItems = useSelector((state: RootState) => state.wishList.items)
+  const dispatch = useDispatch<AppDispatch>()
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -80,40 +82,31 @@ const MobileNav = () => {
       <List>
         {ACTION_LINKS.map(({ label, href, icon: Icon }, index) => (
           <ListItem key={index} disablePadding disableGutters>
-            <ListItemButton
-              component={Link}
-              href={href}
-              sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
-            >
-              {Icon && (
-                <>
-                  {href.includes('cart') ? (
+            {Icon && (
+              <>
+                {href.includes('cart') ? (
+                  <ListItemButton onClick={() => dispatch(toggleCartModal())} sx={{ padding: 0 }}>
                     <Badge badgeContent={extractTotalQuantity(cartItems)} color="secondary">
-                      {CustomListItemIcon({ label, icon: Icon, theme })}
+                      {CustomListItemContent({ label, icon: Icon, theme })}
                     </Badge>
-                  ) : href.includes('wishlist') ? (
+                  </ListItemButton>
+                ) : href.includes('wishlist') ? (
+                  <ListItemButton onClick={() => alert('Open wishlist')} sx={{ padding: 0 }}>
                     <Badge badgeContent={extractTotalQuantity(wishListItems)} color="secondary">
-                      {CustomListItemIcon({ label, icon: Icon, theme })}
+                      {CustomListItemContent({ label, icon: Icon, theme })}
                     </Badge>
-                  ) : (
-                    CustomListItemIcon({ label, icon: Icon, theme })
-                  )}
-                </>
-              )}
-              {label && (
-                <ListItemText
-                  disableTypography
-                  primary={label}
-                  sx={{
-                    textWrap: 'nowrap',
-                    fontSize: '30px',
-                    fontWeight: 700,
-                    color: theme.palette.primary.main,
-                    flexGrow: label.includes('Login') ? 0 : 1,
-                  }}
-                />
-              )}
-            </ListItemButton>
+                  </ListItemButton>
+                ) : (
+                  <ListItemButton
+                    component={Link}
+                    href={href}
+                    sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
+                  >
+                    {CustomListItemContent({ label, icon: Icon, theme })}
+                  </ListItemButton>
+                )}
+              </>
+            )}
           </ListItem>
         ))}
       </List>
@@ -141,15 +134,30 @@ const MobileNav = () => {
 
 export default MobileNav
 
-const CustomListItemIcon = ({ label, icon: Icon, theme }: any) => (
-  <ListItemIcon
-    sx={{
-      minWidth: { xs: '25px', textAlign: 'center' },
-      width: { xs: label.includes('Login') ? 'auto' : '100%' },
-      display: { xs: 'flex' },
-      justifyContent: { xs: 'center' },
-    }}
-  >
-    <Icon fontSize="large" sx={{ color: theme.palette.primary.main }} />
-  </ListItemIcon>
+const CustomListItemContent = ({ label, icon: Icon, theme }: any) => (
+  <>
+    <ListItemIcon
+      sx={{
+        minWidth: { xs: '25px', textAlign: 'center' },
+        width: { xs: label.includes('Login') ? 'auto' : '100%' },
+        display: { xs: 'flex' },
+        justifyContent: { xs: 'center' },
+      }}
+    >
+      <Icon fontSize="large" sx={{ color: theme.palette.primary.main }} />
+    </ListItemIcon>
+    {label && (
+      <ListItemText
+        disableTypography
+        primary={label}
+        sx={{
+          textWrap: 'nowrap',
+          fontSize: '30px',
+          fontWeight: 700,
+          color: theme.palette.primary.main,
+          flexGrow: label.includes('Login') ? 0 : 1,
+        }}
+      />
+    )}
+  </>
 )

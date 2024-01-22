@@ -22,6 +22,8 @@ import BreadCrumb from './ui/Breadcrumb'
 import ColorListPicker from './ui/ColorListPicker'
 import CircularIcon from './ui/CircularIcon'
 import ImageSlider from './ui/ImageSlider'
+import CartModal from './shared/cart-modal'
+import AppModals from './shared/app-modals'
 
 //home
 import HeroContent from './shared/home/hero-content'
@@ -47,4 +49,6 @@ export {
   ColorListPicker,
   CircularIcon,
   ImageSlider,
+  CartModal,
+  AppModals,
 }
