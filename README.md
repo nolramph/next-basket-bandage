@@ -6,7 +6,11 @@
   <h3 align="center">Bandage</h3>
 
   <p align="center">
-    An simple e-commerce website to showcase application of [NextJS](https://nextjs.org/docs), [React](https://react.dev/), [Material UI component documentation](https://mui.com/material-ui/all-components/) and [React redux documentation](https://react-redux.js.org/introduction/getting-started) - approaches to set react redux state management.
+    A simple e-commerce website to showcase application of
+    <a href="https://react.dev/"><strong>React</strong></a>
+    <a href="https://nextjs.org/docs"><strong>NextJS</strong></a>
+    <a href="https://mui.com/material-ui/"><strong>Material UI</strong></a>
+    <a href="https://react-redux.js.org/introduction/getting-started"><strong>React Redux</strong></a>
   </p>
 </div>
 
@@ -79,6 +83,37 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- ROADMAP -->
+## Roadmap
+
+Version 1
+- [x] Add initial setup and scaffolding
+- [x] Add header, body and footer layout
+- [x] Add Homepage
+- [x] Add store setup for react redux state 
+- [x] Add reusable components (Aside from material UI)
+- [x] Add slice for prroducts
+- [x] Dynamic product list render
+- [x] Add product details page section
+- [x] Add cart modal and slice
+- [x] Add wishlist modal and slice
+- [x] Add rest of product details page
+
+Version 1.1
+- [x] Add empty state render for cart and wishlist
+- [ ] Improve reusability of Typography component
+- [ ] Improve product details section (Dynamic rendering of values)
+- [ ] Improve home services section (Dynamic rendering of values)
+- [ ] Improve home testimonial section (Dynamic rendering of values)
+
+Version 2
+- [ ] Setup DB (Mongo)
+- [ ] Select BE Framework (Preferably node)
+- [ ] Create product creation module
+- [ ] Enable storing of Get in touch footer section
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- LICENSE -->
 ## License
@@ -113,3 +148,12 @@ To learn more about this example:
 You can head back to the documentation and continue by browsing the [templates](https://mui.com/material-ui/getting-started/templates/) section.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Material UI]:
+[Material-url]:
