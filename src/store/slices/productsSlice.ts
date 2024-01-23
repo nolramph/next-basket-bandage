@@ -14,6 +14,7 @@ export interface Product {
   images: Array<string>
   brand: string
   stock: number
+  description: string
 }
 
 interface ProductsState {

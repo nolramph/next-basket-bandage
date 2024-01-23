@@ -27,6 +27,11 @@ import FeaturedProducts from './shared/home/featured-products'
 import Testimonial from './shared/home/testimonial'
 import BottomCallToAction from './shared/home/bottom-call-to-action'
 
+//Product
+import Clients from '@/app/products/client'
+import AdditionalInfo from '@/app/products/additional-info'
+import BestSellerProducts from '@/app/products/best-seller-products'
+
 export {
   MobileNav,
   Header,
@@ -51,4 +56,7 @@ export {
   Testimonial,
   BottomCallToAction,
   InputWithButton,
+  Clients,
+  AdditionalInfo,
+  BestSellerProducts,
 }

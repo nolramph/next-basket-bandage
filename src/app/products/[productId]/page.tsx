@@ -3,7 +3,15 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 //components
-import { BreadCrumb, ImageSlider, CircularIcon, ColorListPicker } from '@/components'
+import {
+  BreadCrumb,
+  ImageSlider,
+  CircularIcon,
+  ColorListPicker,
+  Clients,
+  AdditionalInfo,
+  BestSellerProducts,
+} from '@/components'
 import { useSnackbar } from '@/providers/snackbar-provider'
 
 //duxs
@@ -13,8 +21,7 @@ import { addToCart } from '@/store/slices/cartSlice'
 import { addToWishList } from '@/store/slices/wishListSlice'
 
 //mui components
-import { Box, Typography, Rating, Button, useTheme, Divider } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Box, Typography, Rating, Button, useTheme, Divider, Stack } from '@mui/material'
 
 //mui icons
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
@@ -66,94 +73,109 @@ const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
       <Box
         sx={{
           display: 'flex',
-          padding: { xs: '20px 0', md: '0 147px' },
+          padding: { sm: '20px 33px', md: '24px 100px', lg: '0 147px' },
           justifyContent: 'center',
           flexDirection: 'column',
         }}
       >
-        <Grid container spacing={{ xs: 1, md: 2 }}>
-          <Grid xs={12} md={6}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-              <ImageSlider images={product?.images || []} />
-            </Box>
-          </Grid>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 8, lg: 5 }}>
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <ImageSlider images={product?.images || []} />
+          </Box>
 
-          <Grid xs={12} md={6}>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <Box>
+          <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <Box>
+              <Typography
+                gutterBottom
+                fontSize={'20px'}
+                fontWeight={400}
+                sx={{ lineHeight: '30px' }}
+              >
+                {product?.title}
+              </Typography>
+              <Box sx={{ display: 'flex', mb: '20px' }}>
+                <Rating name="read-only" value={Math.round(product?.rating || 0)} readOnly />
                 <Typography
-                  gutterBottom
-                  fontSize={'20px'}
-                  fontWeight={400}
-                  sx={{ lineHeight: '30px' }}
-                >
-                  {product?.title}
-                </Typography>
-                <Box sx={{ display: 'flex', mb: '20px' }}>
-                  <Rating name="read-only" value={Math.round(product?.rating || 0)} readOnly />
-                  <Typography
-                    fontWeight={700}
-                    fontSize={'14px'}
-                    sx={{ lineHeight: '24px', ml: '10px', color: theme.palette.content.main }}
-                    component="legend"
-                  >
-                    10 Reviews
-                  </Typography>
-                </Box>
-                <Typography
-                  gutterBottom
                   fontWeight={700}
-                  fontSize={'24px'}
-                  sx={{ lineHeight: '32px', mb: '5px' }}
+                  fontSize={'14px'}
+                  sx={{ lineHeight: '24px', ml: '10px', color: theme.palette.content.main }}
                   component="legend"
                 >
-                  {formatToUSD(product?.price || 0)}
+                  10 Reviews
                 </Typography>
-                <Box sx={{ display: 'flex', mb: '119px' }}>
-                  <Typography
-                    fontWeight={700}
-                    fontSize={'14px'}
-                    sx={{ lineHeight: '24px', color: theme.palette.content.main }}
-                  >
-                    Availability: &nbsp;
-                  </Typography>
-                  <Typography
-                    fontWeight={700}
-                    fontSize={'14px'}
-                    sx={{ lineHeight: '24px', color: theme.palette.primary.main }}
-                  >
-                    In Stock
-                  </Typography>
-                </Box>
-                <Divider light />
-                <Box sx={{ mt: '29px' }}>
-                  <ColorListPicker
-                    colors={['#23A6F0', '#2DC071', '#E77C40', '#252B42']}
-                    onSelect={color => alert(color)}
-                  />
-                </Box>
-                <Box sx={{ display: 'flex', gap: '10px', mt: '67px' }}>
-                  <Button variant="contained" sx={{ color: 'white' }}>
-                    Selection Options
-                  </Button>
-                  <Button
-                    onClick={handleAddToWishList}
-                    disabled={!!product?.id && wishListIds.includes(product?.id)}
-                  >
-                    <CircularIcon Icon={FavoriteBorderIcon} borderColor="#E8E8E8" />
-                  </Button>
-                  <Button onClick={handleAddToCart}>
-                    <CircularIcon Icon={ShoppingCartOutlinedIcon} borderColor="#E8E8E8" />
-                  </Button>
-                  <Button onClick={() => alert('Product is visible?')}>
-                    <CircularIcon Icon={VisibilityIcon} borderColor="#E8E8E8" />
-                  </Button>
-                </Box>
+              </Box>
+              <Typography
+                gutterBottom
+                fontWeight={700}
+                fontSize={'24px'}
+                sx={{ lineHeight: '32px', mb: '5px' }}
+                component="legend"
+              >
+                {formatToUSD(product?.price || 0)}
+              </Typography>
+              <Box sx={{ display: 'flex' }}>
+                <Typography
+                  fontWeight={700}
+                  fontSize={'14px'}
+                  sx={{ lineHeight: '24px', color: theme.palette.content.main }}
+                >
+                  Availability: &nbsp;
+                </Typography>
+                <Typography
+                  fontWeight={700}
+                  fontSize={'14px'}
+                  sx={{ lineHeight: '24px', color: theme.palette.primary.main }}
+                >
+                  In Stock
+                </Typography>
+              </Box>
+              <Box sx={{ mb: '119px' }}>
+                <Typography fontSize={'14px'} sx={{ lineHeight: '20px', color: '#737373' }}>
+                  {product?.description}
+                </Typography>
+              </Box>
+              <Divider light />
+              <Box sx={{ mt: '29px' }}>
+                <ColorListPicker
+                  colors={['#23A6F0', '#2DC071', '#E77C40', '#252B42']}
+                  onSelect={color => alert(color)}
+                />
+              </Box>
+              <Box sx={{ display: 'flex', gap: '10px', mt: '67px' }}>
+                <Button variant="contained" sx={{ color: 'white' }}>
+                  Selection Options
+                </Button>
+                <Button
+                  onClick={handleAddToWishList}
+                  disabled={!!product?.id && wishListIds.includes(product?.id)}
+                >
+                  <CircularIcon Icon={FavoriteBorderIcon} borderColor="#E8E8E8" />
+                </Button>
+                <Button onClick={handleAddToCart}>
+                  <CircularIcon Icon={ShoppingCartOutlinedIcon} borderColor="#E8E8E8" />
+                </Button>
+                <Button onClick={() => alert('Product is visible?')}>
+                  <CircularIcon Icon={VisibilityIcon} borderColor="#E8E8E8" />
+                </Button>
               </Box>
             </Box>
-          </Grid>
-        </Grid>
+          </Box>
+        </Stack>
       </Box>
+
+      {/* Additional info section */}
+      <AdditionalInfo />
+      {/* Best seller section */}
+      <BestSellerProducts />
+      {/* Client logo section */}
+      <Clients />
     </>
   )
 }

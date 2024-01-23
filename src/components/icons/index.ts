@@ -9,6 +9,12 @@ import BookReader from './section/services/book-reader'
 import Book from './section/services/book'
 import Clock from './section/featured/clock'
 import Graph from './section/featured/graph'
+import Hooli from './clients/hooli'
+import Lyft from './clients/lyft'
+import PiperHat from './clients/piper-hat'
+import Stripe from './clients/stripe'
+import Aws from './clients/aws'
+import Reddit from './clients/reddit'
 
 export {
   Hamburger,
@@ -21,4 +27,10 @@ export {
   Book,
   Clock,
   Graph,
+  Hooli,
+  Lyft,
+  PiperHat,
+  Stripe,
+  Aws,
+  Reddit,
 }

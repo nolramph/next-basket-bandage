@@ -23,7 +23,7 @@ const FooterNav = () => {
         <List>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: 1, sm: 8, lg: 15 }}
+            spacing={{ xs: 1, sm: 4, md: 8, lg: 20, xl: 22 }}
             flexWrap="wrap"
           >
             {FOOTER_LINKS.map(({ main }, index) => (
@@ -76,7 +76,7 @@ const FooterNav = () => {
       </Box>
       <Box
         sx={{
-          padding: { xs: '20px 24px', md: '80px 171px', background: '#FAFAFA' },
+          padding: { xs: '25px 24px', md: '25px 171px', background: '#FAFAFA' },
         }}
       >
         <Grid container spacing={{ xs: 1, md: 2 }}>
@@ -88,7 +88,7 @@ const FooterNav = () => {
               fontSize="14px"
               sx={{ textAlign: { xs: 'center', sm: 'center', md: 'left' }, color: '#737373' }}
             >
-              Made With Love By Finland All Right Reserved{' '}
+              Made With Love By Finland All Right Reserved
             </Typography>
           </Grid>
           <Grid xs sm={3} md={4}></Grid>

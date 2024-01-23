@@ -20,7 +20,7 @@ import { Box, Button, Typography } from '@mui/material'
 //utils
 import { formatToUSD } from '@/utils/format-utils'
 
-const Products = () => {
+const Products = ({ loadMore = true }: { loadMore?: boolean }) => {
   const dispatch = useDispatch<AppDispatch>()
   const products = useSelector((state: RootState) => state.products.items)
   const status = useSelector((state: RootState) => state.products.status)
@@ -65,16 +65,18 @@ const Products = () => {
             </Grid>
           ))}
       </Grid>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Button
-          onClick={handleLoadMore}
-          variant="outlined"
-          size="medium"
-          sx={{ width: 'auto', textTransform: 'uppercase' }}
-        >
-          Load More Products
-        </Button>
-      </Box>
+      {loadMore && (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            onClick={handleLoadMore}
+            variant="outlined"
+            size="medium"
+            sx={{ width: 'auto', textTransform: 'uppercase' }}
+          >
+            Load More Products
+          </Button>
+        </Box>
+      )}
     </Box>
   )
 }

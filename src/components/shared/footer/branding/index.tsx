@@ -25,7 +25,7 @@ const FooterBranding = () => {
       sx={{
         flexGrow: 1,
         width: '100%',
-        padding: { xs: '20px 24px', md: '80px 171px' },
+        padding: { xs: '40px 24px', md: '40px 171px' },
         background: '#FAFAFA',
       }}
     >

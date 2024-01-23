@@ -7,6 +7,12 @@ import {
   BookReader,
   Book,
   ArrowGrowth,
+  Hooli,
+  Lyft,
+  PiperHat,
+  Stripe,
+  Aws,
+  Reddit,
 } from '@/components/icons'
 
 //mui icons
@@ -252,5 +258,25 @@ export const FEATURED_SECTION = [
   {
     ...FEATURED_SECTION_DEFAULT_CONTENT,
     cardImage: 3,
+  },
+]
+
+export const CLIENT_LOGO_SECTION = [Hooli, Lyft, PiperHat, Stripe, Aws, Reddit]
+
+export const ADDITIONAL_INFO_NAVIGATION_HEADER = [
+  {
+    title: 'Description',
+    link: '#description',
+    isActive: true,
+  },
+  {
+    title: 'Additional Information',
+    link: '#additional-information',
+    isActive: false,
+  },
+  {
+    title: 'Reviews',
+    link: '#reviews',
+    isActive: false,
   },
 ]
