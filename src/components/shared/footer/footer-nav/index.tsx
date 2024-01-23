@@ -46,7 +46,7 @@ const FooterNav = () => {
                         >
                           {label}
                         </Typography>
-                        <InputWithButton />
+                        <InputWithButton placeholder="Your Email" label={'Subscribe'} />
                       </>
                     ) : (
                       <Link href={href} passHref style={{ textDecoration: 'none' }}>

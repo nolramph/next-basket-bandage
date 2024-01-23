@@ -18,7 +18,13 @@ const CustomButton = styled(Button)({
   lineHeight: 2.75,
 })
 
-const InputWithButton = () => {
+const InputWithButton = ({
+  placeholder,
+  label = 'Button',
+}: {
+  placeholder?: string
+  label?: string
+}) => {
   const [inputValue, setInputValue] = useState<string>('')
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +43,7 @@ const InputWithButton = () => {
             variant="outlined"
             value={inputValue}
             onChange={handleInputChange}
-            label="Input"
+            label={placeholder}
           />
         </Grid>
         <Grid item>
@@ -48,7 +54,7 @@ const InputWithButton = () => {
             onClick={handleButtonClick}
             sx={{ color: '#FFF' }}
           >
-            Subscribe
+            {label}
           </CustomButton>
         </Grid>
       </Grid>

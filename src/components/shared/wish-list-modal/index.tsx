@@ -34,105 +34,135 @@ const WishListModal = ({ open, onClose, items, onAddItem, onRemoveItem }: WishLi
       <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
         WISHLIST
       </Typography>
-      <Box>
-        {items.map(item => (
-          <Box key={item.id} sx={{ py: '10px' }}>
-            <Typography variant="body1" fontWeight={700} sx={{ pb: '16px' }}>
-              {item.title}
-            </Typography>
+      {items.length === 0 ? (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <Box
+            component="img"
+            src="/assets/images/empty-wishlist.png"
+            alt="empty cart"
+            sx={{
+              width: '50%',
+              height: '50%',
+            }}
+          />
+          <Typography
+            variant="body1"
+            fontSize="16px"
+            sx={{ padding: '5px 8px', width: '50%', textAlign: 'center', color: '#737373' }}
+          >
+            {`Looks like you haven't added items or you removed items from your wishlist`}
+          </Typography>
+        </Box>
+      ) : (
+        <>
+          <Box>
+            {items.map(item => (
+              <Box key={item.id} sx={{ py: '10px' }}>
+                <Typography variant="body1" fontWeight={700} sx={{ pb: '16px' }}>
+                  {item.title}
+                </Typography>
 
-            <Box sx={{ display: 'flex', alignItems: 'flex-start', fontSize: '14px' }}>
-              <Box
-                sx={{
-                  width: 94,
-                  height: 94,
-                  backgroundImage: `url(${item.thumbnail})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              />
-              {/* TODO: Convert to a single responsibility component named counter component */}
-              <Box>
-                <Typography variant="body1" sx={{ lineHeight: 0.8, px: 1.5 }}>
-                  {item.brand}
-                </Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Rating
-                    name="read-only"
-                    value={Math.round(item?.rating || 0)}
-                    readOnly
-                    sx={{ padding: '5px 8px' }}
+                <Box sx={{ display: 'flex', alignItems: 'flex-start', fontSize: '14px' }}>
+                  <Box
+                    sx={{
+                      width: 94,
+                      height: 94,
+                      backgroundImage: `url(${item.thumbnail})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
                   />
-                  <Typography variant="body1" fontSize={14}>
-                    {`(${item.rating})`}
-                  </Typography>
-                </Box>
-                <Typography variant="body1" sx={{ lineHeight: 0.8, padding: '5px 8px' }}>
-                  {`Stock: ${item.stock}`}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  fontWeight={700}
-                  sx={{ display: { xs: 'flex', sm: 'block', md: 'none' }, padding: '5px 8px' }}
-                >
-                  {formatToUSD(item.price * item.quantity)}
-                </Typography>
-                <Box
-                  sx={{
-                    display: { xs: 'block', sm: 'block', md: 'none' },
-                    padding: '5px 8px',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ mt: 3, color: '#FFF' }}
-                    onClick={() => onAddItem(item)}
-                    fullWidth
+                  {/* TODO: Convert to a single responsibility component named counter component */}
+                  <Box>
+                    <Typography variant="body1" sx={{ lineHeight: 0.8, px: 1.5 }}>
+                      {item.brand}
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                      <Rating
+                        name="read-only"
+                        value={Math.round(item?.rating || 0)}
+                        readOnly
+                        sx={{ padding: '5px 8px' }}
+                      />
+                      <Typography variant="body1" fontSize={14}>
+                        {`(${item.rating})`}
+                      </Typography>
+                    </Box>
+                    <Typography variant="body1" sx={{ lineHeight: 0.8, padding: '5px 8px' }}>
+                      {`Stock: ${item.stock}`}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      fontWeight={700}
+                      sx={{ display: { xs: 'flex', sm: 'block', md: 'none' }, padding: '5px 8px' }}
+                    >
+                      {formatToUSD(item.price * item.quantity)}
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: { xs: 'block', sm: 'block', md: 'none' },
+                        padding: '5px 8px',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{ mt: 3, color: '#FFF' }}
+                        onClick={() => onAddItem(item)}
+                        fullWidth
+                      >
+                        Add to cart
+                      </Button>
+                      <Button
+                        variant="contained"
+                        sx={{ mt: 3, color: '#FFF', backgroundColor: '#FF0000' }}
+                        onClick={() => onRemoveItem(item)}
+                        fullWidth
+                      >
+                        Remove
+                      </Button>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      flexGrow: 2,
+                      textAlign: 'right',
+                      display: { xs: 'none', sm: 'none', md: 'block' },
+                    }}
                   >
-                    Add to cart
-                  </Button>
-                  <Button
-                    variant="contained"
-                    sx={{ mt: 3, color: '#FFF', backgroundColor: '#FF0000' }}
-                    onClick={() => onRemoveItem(item)}
-                    fullWidth
-                  >
-                    Remove
-                  </Button>
+                    <Typography variant="body1" fontWeight={700}>
+                      {formatToUSD(item.price * item.quantity)}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      sx={{ mt: 3, color: '#FFF' }}
+                      onClick={() => onAddItem(item)}
+                    >
+                      Add to cart
+                    </Button>
+                    <Button
+                      variant="contained"
+                      sx={{ mt: 3, ml: 2, color: '#FFF', backgroundColor: '#FF0000' }}
+                      onClick={() => onRemoveItem(item)}
+                    >
+                      Remove
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
-              <Box
-                sx={{
-                  flexGrow: 2,
-                  textAlign: 'right',
-                  display: { xs: 'none', sm: 'none', md: 'block' },
-                }}
-              >
-                <Typography variant="body1" fontWeight={700}>
-                  {formatToUSD(item.price * item.quantity)}
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ mt: 3, color: '#FFF' }}
-                  onClick={() => onAddItem(item)}
-                >
-                  Add to cart
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{ mt: 3, ml: 2, color: '#FFF', backgroundColor: '#FF0000' }}
-                  onClick={() => onRemoveItem(item)}
-                >
-                  Remove
-                </Button>
-              </Box>
-            </Box>
+            ))}
           </Box>
-        ))}
-      </Box>
+        </>
+      )}
     </Box>
   </Modal>
 )

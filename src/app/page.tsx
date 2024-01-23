@@ -26,7 +26,7 @@ export default function HomePage() {
       <Box
         sx={{
           display: 'flex',
-          padding: { xs: '80px 24px', md: '80px 171px' },
+          padding: { xs: '80px 24px', md: '150px 171px' },
           justifyContent: 'center',
         }}
       >

@@ -22,7 +22,7 @@ import {
 const HeaderContacts = () => {
   return (
     <AppBar
-      position="static"
+      position="fixed"
       sx={{ zIndex: 2000, bgcolor: '#23856D', display: { xs: 'none', md: 'flex' } }}
     >
       <Toolbar

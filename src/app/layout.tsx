@@ -3,9 +3,6 @@ import CssBaseline from '@mui/material/CssBaseline'
 //components
 import { Header, HeaderContacts, Footer } from '@/components'
 
-//mui components
-import Box from '@mui/material/Box'
-
 //providers
 import Providers from '@/providers'
 
@@ -22,10 +19,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CssBaseline />
           <HeaderContacts />
           <Header />
-          <Box>
-            {children}
-            <Footer />
-          </Box>
+          {children}
+          <Footer />
         </Providers>
       </body>
     </html>

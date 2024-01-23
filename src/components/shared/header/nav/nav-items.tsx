@@ -22,7 +22,10 @@ const Nav = () => {
         {HEADER_LINKS.map(({ label, href }) => (
           <ListItem key={href} disablePadding>
             <ListItemButton component={Link} href={href}>
-              <ListItemText primaryTypographyProps={{ fontSize: '14px' }} primary={label} />
+              <ListItemText
+                primaryTypographyProps={{ fontSize: '14px', fontWeight: '700' }}
+                primary={label}
+              />
               {label === 'Shop' && (
                 <ListItemIcon sx={{ minWidth: { xs: '25px' } }}>
                   <ArrowDropDownIcon fontSize="small" />

@@ -66,8 +66,8 @@ const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
   }
 
   return (
-    <>
-      <Box sx={{ padding: { xs: '20px 0', md: '24px 147px' } }}>
+    <Box sx={{ pt: { xs: '80px', md: '150px' } }}>
+      <Box sx={{ padding: { xs: '20px 0', md: '24px 147px' }, background: '#FAFAFA' }}>
         <BreadCrumb />
       </Box>
       <Box
@@ -76,6 +76,7 @@ const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
           padding: { sm: '20px 33px', md: '24px 100px', lg: '0 147px' },
           justifyContent: 'center',
           flexDirection: 'column',
+          background: '#FAFAFA',
         }}
       >
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={{ xs: 1, sm: 8, lg: 5 }}>
@@ -176,7 +177,7 @@ const ProductDetails = ({ params: { productId } }: SearchParamProps) => {
       <BestSellerProducts />
       {/* Client logo section */}
       <Clients />
-    </>
+    </Box>
   )
 }
 
